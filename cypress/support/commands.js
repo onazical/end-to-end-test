@@ -43,3 +43,18 @@ Cypress.Commands.add('attachFiles', {
     force: true
   })
 })
+
+Cypress.Commands.add('login',
+  () => {
+    cy.readFile('cypress/fixtures/ids/data.json').then(data => {
+    cy.visit(data.baseUrl);
+    cy.url().should('eq', data.baseUrl);
+    cy.get('div.sc-cxpSdN.sc-iIUQWv.dyWuYH > div.sc-cxpSdN.sc-iIUQWv.dyWuYH > button').click();
+    cy.get('#email_login').type(data.email);
+    cy.get('#password').type(data.password);
+    cy.get('#modal-content-home > div > div > form > button').click();
+    });
+  },
+);
+
+

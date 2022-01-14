@@ -1,4 +1,7 @@
 {
+  "testFiles": ["**/*itw_wttj.js"],
+  "ignoreTestFiles": ["itw_youtube.js"],
+  "baseUrl": "https://www.welcometothejungle.com/fr",
   "email": "inqom.qaautomationapplicant@gmail.com",
   "password": "o5N,d5ZR@R7^"
 }
