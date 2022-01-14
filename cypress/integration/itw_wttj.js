@@ -16,8 +16,6 @@ describe(`after visiting ["www.welcometothejungle.com/fr/me/settings/account"] w
       url: 'fr/me/settings/account',
       method: 'GET',
     })
-    cy.wait(2000);
-  
-
+    cy.get ('#avatar > div > div > div > button.sc-jKTccl.jnYYCa');
   })
 })
