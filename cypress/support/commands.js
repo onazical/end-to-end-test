@@ -24,6 +24,8 @@
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
+import 'cypress-file-upload';
+
 Cypress.Commands.add('attachFiles', {
   prevSubject: 'element'
 }, (dom_element, files_data) => {
@@ -44,6 +46,21 @@ Cypress.Commands.add('attachFiles', {
   })
 })
 
+Cypress.Commands.add('upload_file', (fileName, selector) => {
+  return cy.get(selector).then(subject => {
+    return cy.fixture(fileName, 'base64')
+      .then(Cypress.Blob.base64StringToBlob)
+      .then(blob => {
+        const el = subject[0]
+        const testFile = new File([blob], fileName, { type: 'image/png' })
+        const dataTransfer = new DataTransfer()
+        dataTransfer.items.add(testFile)
+        el.files = dataTransfer.files
+        return subject;
+      })
+  })
+})
+
 Cypress.Commands.add('login',
   () => {
     cy.readFile('cypress/fixtures/ids/data.json').then(data => {
@@ -56,5 +73,3 @@ Cypress.Commands.add('login',
     });
   },
 );
-
-
